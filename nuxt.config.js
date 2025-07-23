@@ -58,10 +58,10 @@ export default {
         clientId: 'Ov23ct5BT1GU7CLl5NiZ',
         clientSecret: '94e759d64fc40fdb6330b745dc9b23380e05e19d',
         scope: ['read:user', 'user:email'],
-        codeChallengeMethod: '',
+        codeChallengeMethod: 'S256',
         responseType: 'code',
         grantType: 'authorization_code',
-        redirectUri: 'http://localhost:3000/auth/github/callback'
+        redirectUri: 'http://localhost:3000/auth/callback'
       },
       // --- Discord Strategy ---//
       discord: {
@@ -73,17 +73,17 @@ export default {
         },
 
         clientId: '1397205938867540018',
-        clientSecret: 'u4K312wYXvVLALPIxWAoTLA6EZG-xJ5y',
+        clientSecret: 'GfQ6fJicZemJ32bWD8LSWKFwAp0NCJ_9',
         scope: ['identify', 'email'],
         responseType: 'code',
         grantType: 'authorization_code',
-        redirectUri: 'http://localhost:3000/auth/discord/callback' // Dapat tumugma sa Redirect URI sa Discord Developer Portal
+        redirectUri: 'http://localhost:3000/auth/callback' // Dapat tumugma sa Redirect URI sa Discord Developer Portal
       }
     },
     redirect: {
       login: '/auth/signin',
       logout: '/auth/signin',
-      callback: '/auth/github/callback',
+      callback: '/auth/callback',
       home: '/signature'
     }
   },
