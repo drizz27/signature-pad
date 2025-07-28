@@ -2,9 +2,9 @@ import colors from 'vuetify/es5/util/colors'
 
 export default {
 
-  ssr: false,
+  ssr: true,
 
-  target: 'static',
+  target: 'server',
 
   head: {
     titleTemplate: '%s - nuxt2-signature-app',
@@ -62,7 +62,7 @@ auth: {
       codeChallengeMethod: 'S256',
       responseType: 'code',
       grantType: 'authorization_code',
-      redirectUri: process.env.REDIRECT_URI || 'https://signature-pad-tau.vercel.app'
+      redirectUri: process.env.REDIRECT_URI || 'https://signature-pad-tau.vercel.app/auth/github/callback'
     },
     discord: {
       scheme: 'oauth2',
@@ -76,7 +76,7 @@ auth: {
       scope: ['identify', 'email'],
       responseType: 'code',
       grantType: 'authorization_code',
-      redirectUri: process.env.REDIRECT_URI || 'http://localhost:3000/auth/callback'
+      redirectUri: process.env.REDIRECT_URI || 'https://signature-pad-tau.vercel.app/auth/discord/callback'
     }
   },
   redirect: {
