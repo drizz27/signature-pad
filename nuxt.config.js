@@ -62,7 +62,7 @@ auth: {
       codeChallengeMethod: 'S256',
       responseType: 'code',
       grantType: 'authorization_code',
-      redirectUri: process.env.REDIRECT_URI || 'https://signature-pad-tau.vercel.app/auth/callback'
+      redirectUri: process.env.REDIRECT_URI || 'https://signature-pad-tau.vercel.app'
     },
     discord: {
       scheme: 'oauth2',
