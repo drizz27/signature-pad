@@ -47,7 +47,8 @@ export default {
   ],
 
   axios: {
-    baseURL: '/'
+    baseURL: ''
+    browserBaseURL: ''
   },
 
   // Auth module configuration//
