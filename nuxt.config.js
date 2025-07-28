@@ -37,54 +37,53 @@ export default {
 
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/auth-next'
+    '@nuxtjs/auth-next',
+    '@nuxtjs/dotenv'
+    
   ],
 
   axios: {
-    baseURL: 'http://localhost:3000'
+    baseURL: process.env.BASE_URL || 'http://localhost:3000'
   },
 
   // Auth module configuration//
-  auth: {
-    strategies: {
-      // --- github Strategy ---//
-      github: {
-        scheme: 'oauth2',
-        endpoints: {
-          authorization: 'https://github.com/login/oauth/authorize',
-          token: 'https://github.com/login/oauth/access_token',
-          userInfo: 'https://api.github.com/user'
-        },
-        clientId: 'Ov23ct5BT1GU7CLl5NiZ',
-        clientSecret: '94e759d64fc40fdb6330b745dc9b23380e05e19d',
-        scope: ['read:user', 'user:email'],
-        codeChallengeMethod: 'S256',
-        responseType: 'code',
-        grantType: 'authorization_code',
-        redirectUri: 'http://localhost:3000/auth/callback'
+auth: {
+  strategies: {
+    github: {
+      scheme: 'oauth2',
+      endpoints: {
+        authorization: 'https://github.com/login/oauth/authorize',
+        token: 'https://github.com/login/oauth/access_token',
+        userInfo: 'https://api.github.com/user'
       },
-      // --- Discord Strategy ---//
-      discord: {
-        scheme: 'oauth2',
-        endpoints: {
-          authorization: 'https://discord.com/oauth2/authorize',
-          token: 'https://discord.com/api/oauth2/token',
-          userInfo: 'https://discord.com/api/users/@me'
-        },
-
-        clientId: '1397205938867540018',
-        clientSecret: 'GfQ6fJicZemJ32bWD8LSWKFwAp0NCJ_9',
-        scope: ['identify', 'email'],
-        responseType: 'code',
-        grantType: 'authorization_code',
-        redirectUri: 'http://localhost:3000/auth/callback' // Dapat tumugma sa Redirect URI sa Discord Developer Portal
-      }
+      clientId: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      scope: ['read:user', 'user:email'],
+      codeChallengeMethod: 'S256',
+      responseType: 'code',
+      grantType: 'authorization_code',
+      redirectUri: process.env.REDIRECT_URI || 'https://signature-pad-tau.vercel.app/auth/callback'
     },
-    redirect: {
-      login: '/auth/signin',
-      logout: '/auth/signin',
-      callback: '/auth/callback',
-      home: '/signature'
+    discord: {
+      scheme: 'oauth2',
+      endpoints: {
+        authorization: 'https://discord.com/oauth2/authorize',
+        token: 'https://discord.com/api/oauth2/token',
+        userInfo: 'https://discord.com/api/users/@me'
+      },
+      clientId: process.env.DISCORD_CLIENT_ID,
+      clientSecret: process.env.DISCORD_CLIENT_SECRET,
+      scope: ['identify', 'email'],
+      responseType: 'code',
+      grantType: 'authorization_code',
+      redirectUri: process.env.REDIRECT_URI || 'http://localhost:3000/auth/callback'
+    }
+  },
+  redirect: {
+    login: '/auth/signin',
+    logout: '/auth/signin',
+    callback: '/auth/callback',
+    home: '/signature'
     }
   },
 
