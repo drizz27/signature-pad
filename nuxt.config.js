@@ -47,12 +47,13 @@ export default {
   ],
 
   axios: {
-    baseURL: ''
+    baseURL: 'https://signature-pad-rho.vercel.app',
     browserBaseURL: ''
   },
 
   // Auth module configuration//
   auth: {
+    plugins: ['~/plugins/auth.js'],
     strategies: {
       github: {
         scheme: 'oauth2',
@@ -64,7 +65,7 @@ export default {
         responseType: 'token',
         clientId: process.env.GITHUB_CLIENT_ID,
         clientSecret: process.env.GITHUB_CLIENT_SECRET,
-        redirectUri: process.env.GITHUB_REDIRECT_URI + '/auth/github/callback',
+        redirectUri: process.env.GITHUB_REDIRECT_URI
       },
       discord: {
         scheme: 'oauth2',
@@ -76,7 +77,7 @@ export default {
         scope: ['identify', 'email'],
         clientId: process.env.DISCORD_CLIENT_ID,
         clientSecret: process.env.DISCORD_CLIENT_SECRET,
-        redirectUri: process.env.DISCORD_REDIRECT_URI + '/auth/discord/callback',
+        redirectUri: process.env.DISCORD_REDIRECT_URI
       },
     },
     redirect: {
