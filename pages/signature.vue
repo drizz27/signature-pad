@@ -125,7 +125,7 @@ export default {
       drawer: false,
       fixed: false,
       miniVariant: false,
-      title: 'Pirma Form',
+      title: 'e-Signature',
 
       savedImage: null,
       penColor: '#000000',
