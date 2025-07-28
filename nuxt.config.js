@@ -2,9 +2,9 @@ import colors from 'vuetify/es5/util/colors'
 
 export default {
 
-  ssr: true,
+  ssr: false,
 
-  target: 'server',
+  target: 'static',
 
   head: {
     titleTemplate: '%s - nuxt2-signature-app',
@@ -37,18 +37,17 @@ export default {
 
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/auth-next',
-    '@nuxtjs/dotenv'
-    
+    '@nuxtjs/auth-next'
   ],
 
   axios: {
-    baseURL: process.env.BASE_URL || 'http://localhost:3000'
+    baseURL: 'http://localhost:3000'
   },
 
   // Auth module configuration//
 auth: {
   strategies: {
+    // --- GitHub Strategy --- //
     github: {
       scheme: 'oauth2',
       endpoints: {
@@ -62,8 +61,10 @@ auth: {
       codeChallengeMethod: 'S256',
       responseType: 'code',
       grantType: 'authorization_code',
-      redirectUri: process.env.REDIRECT_URI || 'https://signature-pad-tau.vercel.app/auth/github/callback'
+      redirectUri: process.env.GITHUB_REDIRECT_URI || 'http://localhost:3000/auth/callback'
     },
+
+    // --- Discord Strategy --- //
     discord: {
       scheme: 'oauth2',
       endpoints: {
@@ -76,7 +77,7 @@ auth: {
       scope: ['identify', 'email'],
       responseType: 'code',
       grantType: 'authorization_code',
-      redirectUri: process.env.REDIRECT_URI || 'https://signature-pad-tau.vercel.app/auth/discord/callback'
+      redirectUri: process.env.DISCORD_REDIRECT_URI || 'http://localhost:3000/auth/callback'
     }
   },
   redirect: {
@@ -84,8 +85,8 @@ auth: {
     logout: '/auth/signin',
     callback: '/auth/callback',
     home: '/signature'
-    }
-  },
+  }
+},
 
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
