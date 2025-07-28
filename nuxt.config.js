@@ -1,13 +1,8 @@
-require('dotenv').config()
 import colors from 'vuetify/es5/util/colors'
-export default {
-  
-  target: 'static',
-  ssr: false,
-  generate: {
-    fallback: true // for 404.html fallback
-  },
 
+export default {
+  ssr: false,
+  target: 'static',
   head: {
     titleTemplate: '%s - nuxt2-signature-app',
     title: 'nuxt2-signature-app',
@@ -36,56 +31,59 @@ export default {
   buildModules: [
     '@nuxtjs/vuetify',
   ],
-  router: {
-    middleware: ['auth']
-  },
 
   modules: [
     '@nuxtjs/axios',
-    '@nuxt/http',
     '@nuxtjs/auth-next'
   ],
 
   axios: {
-    baseURL: process.env.BASE_URL || 'https://signature-pad-gamma.vercel.app',
-    browserBaseURL: process.env.BASE_URL || 'https://signature-pad-gamma.vercel.app'
+    // Ito ang magiging base URL ng iyong app sa Vercel (e.g., https://your-app.vercel.app)
+    baseURL: process.env.BASE_URL || 'http://localhost:3000'
   },
 
-  // Auth module configuration//
   auth: {
-    plugins: ['~/plugins/auth.js'],
     strategies: {
       github: {
         scheme: 'oauth2',
         endpoints: {
           authorization: 'https://github.com/login/oauth/authorize',
           token: 'https://github.com/login/oauth/access_token',
-          userInfo: 'https://api.github.com/user',
+          userInfo: 'https://api.github.com/user'
         },
-        responseType: 'token',
+        // Ito ay kukunin mula sa Vercel environment variables
         clientId: process.env.GITHUB_CLIENT_ID,
         clientSecret: process.env.GITHUB_CLIENT_SECRET,
-        redirectUri: process.env.REDIRECT_URI
+        scope: ['read:user', 'user:email'],
+        codeChallengeMethod: 'S256',
+        responseType: 'code',
+        grantType: 'authorization_code',
+        // Ito ang callback URL sa Vercel (e.g., https://your-app.vercel.app/auth/callback)
+        redirectUri: process.env.AUTH_REDIRECT_URI || 'http://localhost:3000/auth/callback'
       },
       discord: {
         scheme: 'oauth2',
         endpoints: {
-          authorization: 'https://discord.com/api/oauth2/authorize',
+          authorization: 'https://discord.com/oauth2/authorize',
           token: 'https://discord.com/api/oauth2/token',
-          userInfo: 'https://discord.com/api/users/@me',
+          userInfo: 'https://discord.com/api/users/@me'
         },
-        scope: ['identify', 'email'],
+        // Ito ay kukunin mula sa Vercel environment variables
         clientId: process.env.DISCORD_CLIENT_ID,
         clientSecret: process.env.DISCORD_CLIENT_SECRET,
-        redirectUri: process.env.REDIRECT_URI
-      },
+        scope: ['identify', 'email'],
+        responseType: 'code',
+        grantType: 'authorization_code',
+        // Ito ang callback URL sa Vercel
+        redirectUri: process.env.AUTH_REDIRECT_URI || 'http://localhost:3000/auth/callback'
+      }
     },
     redirect: {
       login: '/auth/signin',
       logout: '/auth/signin',
       callback: '/auth/callback',
-      home: '/signature',
-    },
+      home: '/signature'
+    }
   },
 
   vuetify: {
