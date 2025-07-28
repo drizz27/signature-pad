@@ -47,8 +47,8 @@ export default {
   ],
 
   axios: {
-    baseURL: 'https://signature-pad-rho.vercel.app',
-    browserBaseURL: ''
+    baseURL: 'https://signature-pad-gamma.vercel.app',
+    browserBaseURL: 'https://signature-pad-gamma.vercel.app'
   },
 
   // Auth module configuration//
