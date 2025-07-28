@@ -1,5 +1,5 @@
+require('dotenv').config()
 import colors from 'vuetify/es5/util/colors'
-
 export default {
   
   target: 'static',
@@ -74,9 +74,9 @@ export default {
     },
     redirect: {
       login: '/auth/signin',
-      logout: '/',
+      logout: '/auth/signin',
       callback: '/auth/callback',
-      home: '/',
+      home: '/signature',
     },
   },
 

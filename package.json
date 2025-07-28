@@ -14,6 +14,7 @@
     "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/dotenv": "^1.4.2",
     "core-js": "^3.15.1",
+    "dotenv": "^17.2.1",
     "firebase": "^12.0.0",
     "nuxt": "^2.18.1",
     "vue-signature-pad": "^2.0.0",
