@@ -1,10 +1,9 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
-
-  ssr: false,
-
+  
   target: 'static',
+  ssr: false,
 
   head: {
     titleTemplate: '%s - nuxt2-signature-app',
@@ -41,52 +40,44 @@ export default {
   ],
 
   axios: {
-    baseURL: 'http://localhost:3000'
+    baseURL: '/'
   },
 
   // Auth module configuration//
-auth: {
-  strategies: {
-    // --- GitHub Strategy --- //
-    github: {
-      scheme: 'oauth2',
-      endpoints: {
-        authorization: 'https://github.com/login/oauth/authorize',
-        token: 'https://github.com/login/oauth/access_token',
-        userInfo: 'https://api.github.com/user'
+  auth: {
+    strategies: {
+      github: {
+        scheme: 'oauth2',
+        endpoints: {
+          authorization: 'https://github.com/login/oauth/authorize',
+          token: 'https://github.com/login/oauth/access_token',
+          userInfo: 'https://api.github.com/user',
+        },
+        responseType: 'token',
+        clientId: process.env.GITHUB_CLIENT_ID,
+        clientSecret: process.env.GITHUB_CLIENT_SECRET,
+        redirectUri: process.env.GITHUB_REDIRECT_URI,
       },
-      clientId: process.env.GITHUB_CLIENT_ID,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      scope: ['read:user', 'user:email'],
-      codeChallengeMethod: 'S256',
-      responseType: 'code',
-      grantType: 'authorization_code',
-      redirectUri: process.env.GITHUB_REDIRECT_URI || 'http://localhost:3000/auth/callback'
+      discord: {
+        scheme: 'oauth2',
+        endpoints: {
+          authorization: 'https://discord.com/api/oauth2/authorize',
+          token: 'https://discord.com/api/oauth2/token',
+          userInfo: 'https://discord.com/api/users/@me',
+        },
+        scope: ['identify', 'email'],
+        clientId: process.env.DISCORD_CLIENT_ID,
+        clientSecret: process.env.DISCORD_CLIENT_SECRET,
+        redirectUri: process.env.DISCORD_REDIRECT_URI,
+      },
     },
-
-    // --- Discord Strategy --- //
-    discord: {
-      scheme: 'oauth2',
-      endpoints: {
-        authorization: 'https://discord.com/oauth2/authorize',
-        token: 'https://discord.com/api/oauth2/token',
-        userInfo: 'https://discord.com/api/users/@me'
-      },
-      clientId: process.env.DISCORD_CLIENT_ID,
-      clientSecret: process.env.DISCORD_CLIENT_SECRET,
-      scope: ['identify', 'email'],
-      responseType: 'code',
-      grantType: 'authorization_code',
-      redirectUri: process.env.DISCORD_REDIRECT_URI || 'http://localhost:3000/auth/callback'
-    }
+    redirect: {
+      login: '/auth/signin',
+      logout: '/',
+      callback: '/auth/callback',
+      home: '/',
+    },
   },
-  redirect: {
-    login: '/auth/signin',
-    logout: '/auth/signin',
-    callback: '/auth/callback',
-    home: '/signature'
-  }
-},
 
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
