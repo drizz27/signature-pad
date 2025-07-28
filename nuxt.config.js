@@ -4,6 +4,9 @@ export default {
   
   target: 'static',
   ssr: false,
+  generate: {
+    fallback: true // for 404.html fallback
+  },
 
   head: {
     titleTemplate: '%s - nuxt2-signature-app',
