@@ -47,8 +47,8 @@ export default {
   ],
 
   axios: {
-    baseURL: 'https://signature-pad-gamma.vercel.app',
-    browserBaseURL: 'https://signature-pad-gamma.vercel.app'
+    baseURL: process.env.BASE_URL || 'https://signature-pad-gamma.vercel.app',
+    browserBaseURL: process.env.BASE_URL || 'https://signature-pad-gamma.vercel.app'
   },
 
   // Auth module configuration//
@@ -65,7 +65,7 @@ export default {
         responseType: 'token',
         clientId: process.env.GITHUB_CLIENT_ID,
         clientSecret: process.env.GITHUB_CLIENT_SECRET,
-        redirectUri: process.env.GITHUB_REDIRECT_URI
+        redirectUri: process.env.REDIRECT_URI
       },
       discord: {
         scheme: 'oauth2',
@@ -77,7 +77,7 @@ export default {
         scope: ['identify', 'email'],
         clientId: process.env.DISCORD_CLIENT_ID,
         clientSecret: process.env.DISCORD_CLIENT_SECRET,
-        redirectUri: process.env.DISCORD_REDIRECT_URI
+        redirectUri: process.env.REDIRECT_URI
       },
     },
     redirect: {
