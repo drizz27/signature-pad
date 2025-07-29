@@ -1,14 +1,18 @@
-<template>
-  <div>
-    <p>Redirecting you back...</p>
-    <p>If you're stuck, please try logging in again.</p>
-  </div>
-</template>
-
 <script>
 export default {
   async created() {
-    await this.$auth.handleCallback()
+    console.log('Before handleCallback', this.$auth.loggedIn)
+
+    try {
+      await this.$auth.handleCallback()
+      console.log('After handleCallback', this.$auth.loggedIn)
+
+      if (this.$auth.loggedIn) {
+        this.$router.push('/signature') // force redirect
+      }
+    } catch (error) {
+      console.error('Auth callback error:', error)
+    }
   }
 }
 </script>
