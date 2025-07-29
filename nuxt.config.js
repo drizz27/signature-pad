@@ -50,6 +50,7 @@ export default {
   },
 
 auth: {
+  debug: true,
   redirect: {
     login: '/auth/signin',
     logout: '/',
