@@ -6,25 +6,17 @@
 
 <script>
 export default {
-  async mounted() {
-    console.log('🔄 Starting auth callback process...')
-
-    try {
-      await this.$auth.handleCallback()
-      console.log('✅ Callback handled, loggedIn:', this.$auth.loggedIn)
-
-      // Redirect to home (signature.vue) after successful login
+  mounted() {
+    // Wait a moment to let auth finish, then redirect
+    setTimeout(() => {
       if (this.$auth.loggedIn) {
+        console.log('✅ Already logged in! Redirecting to /signature...')
         this.$router.replace('/signature')
       } else {
-        console.warn('⚠️ Not logged in after callback, redirecting to signin')
+        console.warn('⚠️ Still not logged in, going to /auth/signin...')
         this.$router.replace('/auth/signin')
       }
-
-    } catch (error) {
-      console.error('❌ Auth callback error:', error)
-      this.$router.replace('/auth/signin')
-    }
+    }, 1000) // Give it time to auto-login
   }
 }
 </script>
