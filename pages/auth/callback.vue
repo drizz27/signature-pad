@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  async mounted() {
+  async created() {
     await this.$auth.handleCallback()
   }
 }
