@@ -48,45 +48,55 @@ export default {
     baseURL: process.env.BASE_URL || 'https://signature-pad-ten.vercel.app' // ✅ Default to production domain if env is missing
   },
 
-  auth: {
-    strategies: {
-      github: {
-        scheme: 'oauth2',
-        endpoints: {
-          authorization: 'https://github.com/login/oauth/authorize',
-          token: 'https://github.com/login/oauth/access_token',
-          userInfo: 'https://api.github.com/user'
-        },
-        clientId: process.env.GITHUB_CLIENT_ID,
-        clientSecret: process.env.GITHUB_CLIENT_SECRET,
-        scope: ['read:user', 'user:email'],
-        codeChallengeMethod: 'S256',
-        responseType: 'code',
-        grantType: 'authorization_code',
-        redirectUri: process.env.AUTH_REDIRECT_URI || 'https://signature-pad-ten.vercel.app/auth/callback'
-      },
-      discord: {
-        scheme: 'oauth2',
-        endpoints: {
-          authorization: 'https://discord.com/oauth2/authorize',
-          token: 'https://discord.com/api/oauth2/token',
-          userInfo: 'https://discord.com/api/users/@me'
-        },
-        clientId: process.env.DISCORD_CLIENT_ID,
-        clientSecret: process.env.DISCORD_CLIENT_SECRET,
-        scope: ['identify', 'email'],
-        responseType: 'code',
-        grantType: 'authorization_code',
-        redirectUri: process.env.AUTH_REDIRECT_URI || 'https://signature-pad-ten.vercel.app/auth/callback'
-      }
-    },
-    redirect: {
-      login: '/auth/signin',
-      logout: '/auth/signin',
-      callback: '/auth/callback',
-      home: '/signature' // ✅ Main page after login
-    }
+auth: {
+  redirect: {
+    login: '/auth/signin',
+    logout: '/',
+    callback: '/auth/callback',
+    home: '/signature'
   },
+  strategies: {
+    github: {
+      scheme: 'oauth2',
+      endpoints: {
+        authorization: 'https://github.com/login/oauth/authorize',
+        token: {
+          url: 'https://github.com/login/oauth/access_token',
+          method: 'post',
+          property: 'access_token' // 🔑 Extract token properly
+        },
+        userInfo: 'https://api.github.com/user'
+      },
+      clientId: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      scope: ['read:user', 'user:email'],
+      responseType: 'code',
+      grantType: 'authorization_code',
+      codeChallengeMethod: 'S256',
+      redirectUri: process.env.AUTH_REDIRECT_URI || 'https://signature-pad-ten.vercel.app/auth/callback'
+    },
+    discord: {
+      scheme: 'oauth2',
+      endpoints: {
+        authorization: 'https://discord.com/oauth2/authorize',
+        token: {
+          url: 'https://discord.com/api/oauth2/token',
+          method: 'post',
+          property: 'access_token' // 🔑 Required!
+        },
+        userInfo: 'https://discord.com/api/users/@me'
+      },
+      clientId: process.env.DISCORD_CLIENT_ID,
+      clientSecret: process.env.DISCORD_CLIENT_SECRET,
+      scope: ['identify', 'email'],
+      responseType: 'code',
+      grantType: 'authorization_code',
+      codeChallengeMethod: 'S256',
+      redirectUri: process.env.AUTH_REDIRECT_URI || 'https://signature-pad-ten.vercel.app/auth/callback'
+    }
+  }
+},
+
 
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
