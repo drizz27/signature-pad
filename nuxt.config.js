@@ -50,66 +50,43 @@ export default {
   },
 
 auth: {
-  debug: true,
   redirect: {
-    login: '/auth/signin',
-    logout: '/',
-    callback: '/auth/callback',
-    home: '/signature'
+    login: '/login',   // where to go if not logged in
+    logout: '/',        // after logout
+    callback: '/auth/callback',  // temp auth handler
+    home: '/signature' // after login success
   },
-  localStorage: true, // ✅ Enable localStorage
   strategies: {
     github: {
       scheme: 'oauth2',
       endpoints: {
         authorization: 'https://github.com/login/oauth/authorize',
-        token: {
-          url: 'https://github.com/login/oauth/access_token',
-          method: 'post',
-          property: 'access_token'
-        },
+        token: 'https://github.com/login/oauth/access_token',
         userInfo: 'https://api.github.com/user'
-      },
-      token: {
-        property: 'access_token',
-        type: 'Bearer' // ✅ Add this!
       },
       clientId: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
       scope: ['read:user', 'user:email'],
       responseType: 'code',
       grantType: 'authorization_code',
-      codeChallengeMethod: 'S256',
-      redirectUri: process.env.GITHUB_REDIRECT_URI,
+      redirectUri: process.env.GITHUB_REDIRECT_URI
     },
-
     discord: {
       scheme: 'oauth2',
       endpoints: {
-        authorization: 'https://discord.com/oauth2/authorize',
-        token: {
-          url: 'https://discord.com/api/oauth2/token',
-          method: 'post',
-          property: 'access_token'
-        },
+        authorization: 'https://discord.com/api/oauth2/authorize',
+        token: 'https://discord.com/api/oauth2/token',
         userInfo: 'https://discord.com/api/users/@me'
-      },
-      token: {
-        property: 'access_token',
-        type: 'Bearer' // ✅ Add this too!
       },
       clientId: process.env.DISCORD_CLIENT_ID,
       clientSecret: process.env.DISCORD_CLIENT_SECRET,
       scope: ['identify', 'email'],
       responseType: 'code',
       grantType: 'authorization_code',
-      codeChallengeMethod: 'S256',
-      redirectUri: process.env.DISCORD_REDIRECT_URI,
+      redirectUri: process.env.DISCORD_REDIRECT_URI
     }
   }
 },
-
-
 
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
