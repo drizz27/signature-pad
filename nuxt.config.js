@@ -80,7 +80,7 @@ auth: {
       responseType: 'code',
       grantType: 'authorization_code',
       codeChallengeMethod: 'S256',
-      redirectUri: process.env.AUTH_REDIRECT_URI || 'https://signature-pad-ten.vercel.app/auth/callback'
+      redirectUri: process.env.AUTH_REDIRECT_URI
     },
 
     discord: {
@@ -104,7 +104,7 @@ auth: {
       responseType: 'code',
       grantType: 'authorization_code',
       codeChallengeMethod: 'S256',
-      redirectUri: process.env.AUTH_REDIRECT_URI || 'https://signature-pad-ten.vercel.app/auth/callback'
+      redirectUri: process.env.AUTH_REDIRECT_URI
     }
   }
 },
