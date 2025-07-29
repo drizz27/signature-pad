@@ -9,6 +9,7 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@nuxt/auth-next": "github:nuxt-community/auth-module#dev",
     "@nuxt/http": "^0.6.4",
     "@nuxtjs/auth-next": "^5.0.0-1667386184.dfbbb54",
     "@nuxtjs/axios": "^5.13.6",
@@ -19,7 +20,7 @@
     "nuxt": "^2.18.1",
     "vue-signature-pad": "^2.0.0",
     "vuetify": "^2.5.5"
-  },  
+  },
   "devDependencies": {
     "@nuxtjs/vuetify": "^1.12.1"
   }
