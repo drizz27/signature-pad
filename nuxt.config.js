@@ -27,9 +27,7 @@ export default {
     ]
   },
 
-  css: [
-    '~/assets/style/app.styl'
-  ],
+  css: [],
 
   plugins: [
     { src: '~/plugins/vue-signature-pad.js', mode: 'client' }
