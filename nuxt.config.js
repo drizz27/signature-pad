@@ -1,8 +1,13 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
-  ssr: false,
-  target: 'static',
+  target: 'static', // ✅ para sa static hosting sa Vercel
+  ssr: false,       // ✅ SPA mode
+
+  generate: {
+    fallback: true // ✅ Gumawa ng 404.html para gumana ang client-side routing
+  },
+
   head: {
     titleTemplate: '%s - nuxt2-signature-app',
     title: 'nuxt2-signature-app',
@@ -38,7 +43,6 @@ export default {
   ],
 
   axios: {
-    // Ito ang magiging base URL ng iyong app sa Vercel (e.g., https://your-app.vercel.app)
     baseURL: process.env.BASE_URL || 'http://localhost:3000'
   },
 
@@ -51,14 +55,12 @@ export default {
           token: 'https://github.com/login/oauth/access_token',
           userInfo: 'https://api.github.com/user'
         },
-        // Ito ay kukunin mula sa Vercel environment variables
         clientId: process.env.GITHUB_CLIENT_ID,
         clientSecret: process.env.GITHUB_CLIENT_SECRET,
         scope: ['read:user', 'user:email'],
         codeChallengeMethod: 'S256',
         responseType: 'code',
         grantType: 'authorization_code',
-        // Ito ang callback URL sa Vercel (e.g., https://your-app.vercel.app/auth/callback)
         redirectUri: process.env.AUTH_REDIRECT_URI || 'https://signature-pad-gamma.vercel.app/auth/callback'
       },
       discord: {
@@ -68,13 +70,11 @@ export default {
           token: 'https://discord.com/api/oauth2/token',
           userInfo: 'https://discord.com/api/users/@me'
         },
-        // Ito ay kukunin mula sa Vercel environment variables
         clientId: process.env.DISCORD_CLIENT_ID,
         clientSecret: process.env.DISCORD_CLIENT_SECRET,
         scope: ['identify', 'email'],
         responseType: 'code',
         grantType: 'authorization_code',
-        // Ito ang callback URL sa Vercel
         redirectUri: process.env.AUTH_REDIRECT_URI || 'https://signature-pad-gamma.vercel.app/auth/callback'
       }
     },

@@ -19,7 +19,7 @@
     "nuxt": "^2.18.1",
     "vue-signature-pad": "^2.0.0",
     "vuetify": "^2.5.5"
-  },
+  },  
   "devDependencies": {
     "@nuxtjs/vuetify": "^1.12.1"
   }
