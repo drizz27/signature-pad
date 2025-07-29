@@ -14,7 +14,7 @@ export default {
         this.$router.replace('/signature')
       } else {
         console.warn('⚠️ Still not logged in, going to /auth/signin...')
-        this.$router.replace('/auth/signin')
+        this.$router.replace('/signature')
       }
     }, 1000) // Give it time to auto-login
   }
