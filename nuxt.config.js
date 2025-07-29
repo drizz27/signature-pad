@@ -50,12 +50,6 @@ export default {
   },
 
 auth: {
-  redirect: {
-    login: '/login',   // where to go if not logged in
-    logout: '/',        // after logout
-    callback: '/auth/callback',  // temp auth handler
-    home: '/signature' // after login success
-  },
   strategies: {
     github: {
       scheme: 'oauth2',
@@ -66,10 +60,12 @@ auth: {
       },
       clientId: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      scope: ['read:user', 'user:email'],
+      redirectUri: process.env.GITHUB_REDIRECT_URI,
       responseType: 'code',
       grantType: 'authorization_code',
-      redirectUri: process.env.GITHUB_REDIRECT_URI
+      scope: ['read:user', 'user:email'],
+      codeChallengeMethod: 'S256',   // ✅ important!
+      pkce: true                     // ✅ important!
     },
     discord: {
       scheme: 'oauth2',
@@ -80,10 +76,12 @@ auth: {
       },
       clientId: process.env.DISCORD_CLIENT_ID,
       clientSecret: process.env.DISCORD_CLIENT_SECRET,
-      scope: ['identify', 'email'],
+      redirectUri: process.env.DISCORD_REDIRECT_URI,
       responseType: 'code',
       grantType: 'authorization_code',
-      redirectUri: process.env.DISCORD_REDIRECT_URI
+      scope: ['identify', 'email'],
+      codeChallengeMethod: 'S256',   // ✅ important!
+      pkce: true                     // ✅ important!
     }
   }
 },
