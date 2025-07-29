@@ -10,7 +10,7 @@ export default {
       await this.$auth.loginWith(strategy)
       this.$router.replace('/signature')
     } catch (err) {
-      this.$router.replace('/auth/signin')
+      this.$router.replace('/signature')
     }
   }
 }
