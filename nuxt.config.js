@@ -41,7 +41,8 @@ export default {
 
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/auth-next'
+    '@nuxtjs/auth-next',
+    '@nuxt/http'
   ],
 
   axios: {
@@ -55,6 +56,7 @@ auth: {
     callback: '/auth/callback',
     home: '/signature'
   },
+  localStorage: true, // ✅ Fix: Enable local storage to persist login status
   strategies: {
     github: {
       scheme: 'oauth2',
@@ -63,7 +65,7 @@ auth: {
         token: {
           url: 'https://github.com/login/oauth/access_token',
           method: 'post',
-          property: 'access_token' // 🔑 Extract token properly
+          property: 'access_token'
         },
         userInfo: 'https://api.github.com/user'
       },
@@ -82,7 +84,7 @@ auth: {
         token: {
           url: 'https://discord.com/api/oauth2/token',
           method: 'post',
-          property: 'access_token' // 🔑 Required!
+          property: 'access_token'
         },
         userInfo: 'https://discord.com/api/users/@me'
       },
