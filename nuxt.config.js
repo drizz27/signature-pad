@@ -1,11 +1,13 @@
+require('dotenv').config() // ✅ Load .env before config
+
 import colors from 'vuetify/es5/util/colors'
 
 export default {
-  target: 'static', // ✅ para sa static hosting sa Vercel
-  ssr: false,       // ✅ SPA mode
+  target: 'static', // ✅ For Vercel static hosting
+  ssr: false,       // ✅ SPA mode (no server-side rendering)
 
   generate: {
-    fallback: true // ✅ Gumawa ng 404.html para gumana ang client-side routing
+    fallback: true // ✅ Create 404.html for client-side routing on static hosting
   },
 
   head: {
@@ -30,14 +32,13 @@ export default {
   ],
 
   plugins: [
-    '~/plugins/vuetify.js',
     { src: '~/plugins/vue-signature-pad.js', mode: 'client' }
   ],
 
   components: true,
 
   buildModules: [
-    '@nuxtjs/vuetify',
+    '@nuxtjs/vuetify'
   ],
 
   modules: [
@@ -46,7 +47,7 @@ export default {
   ],
 
   axios: {
-    baseURL: process.env.BASE_URL || 'http://localhost:3000'
+    baseURL: process.env.BASE_URL || 'https://signature-pad-ten.vercel.app' // ✅ Default to production domain if env is missing
   },
 
   auth: {
@@ -85,7 +86,7 @@ export default {
       login: '/auth/signin',
       logout: '/auth/signin',
       callback: '/auth/callback',
-      home: '/signature'
+      home: '/signature' // ✅ Main page after login
     }
   },
 
