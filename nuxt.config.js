@@ -59,7 +59,7 @@ export default {
         responseType: 'code',
         grantType: 'authorization_code',
         // Ito ang callback URL sa Vercel (e.g., https://your-app.vercel.app/auth/callback)
-        redirectUri: process.env.AUTH_REDIRECT_URI || 'http://localhost:3000/auth/callback'
+        redirectUri: process.env.AUTH_REDIRECT_URI || 'https://signature-pad-gamma.vercel.app/auth/callback'
       },
       discord: {
         scheme: 'oauth2',
@@ -75,7 +75,7 @@ export default {
         responseType: 'code',
         grantType: 'authorization_code',
         // Ito ang callback URL sa Vercel
-        redirectUri: process.env.AUTH_REDIRECT_URI || 'http://localhost:3000/auth/callback'
+        redirectUri: process.env.AUTH_REDIRECT_URI || 'https://signature-pad-gamma.vercel.app/auth/callback'
       }
     },
     redirect: {
