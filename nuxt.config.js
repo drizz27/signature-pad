@@ -56,7 +56,7 @@ auth: {
     callback: '/auth/callback',
     home: '/signature'
   },
-  localStorage: true, // ✅ Fix: Enable local storage to persist login status
+  localStorage: true, // ✅ Enable localStorage
   strategies: {
     github: {
       scheme: 'oauth2',
@@ -69,6 +69,10 @@ auth: {
         },
         userInfo: 'https://api.github.com/user'
       },
+      token: {
+        property: 'access_token',
+        type: 'Bearer' // ✅ Add this!
+      },
       clientId: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
       scope: ['read:user', 'user:email'],
@@ -77,6 +81,7 @@ auth: {
       codeChallengeMethod: 'S256',
       redirectUri: process.env.AUTH_REDIRECT_URI || 'https://signature-pad-ten.vercel.app/auth/callback'
     },
+
     discord: {
       scheme: 'oauth2',
       endpoints: {
@@ -88,6 +93,10 @@ auth: {
         },
         userInfo: 'https://discord.com/api/users/@me'
       },
+      token: {
+        property: 'access_token',
+        type: 'Bearer' // ✅ Add this too!
+      },
       clientId: process.env.DISCORD_CLIENT_ID,
       clientSecret: process.env.DISCORD_CLIENT_SECRET,
       scope: ['identify', 'email'],
@@ -98,6 +107,7 @@ auth: {
     }
   }
 },
+
 
 
   vuetify: {
