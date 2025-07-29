@@ -61,7 +61,7 @@ export default {
         codeChallengeMethod: 'S256',
         responseType: 'code',
         grantType: 'authorization_code',
-        redirectUri: process.env.AUTH_REDIRECT_URI || 'https://signature-pad-gamma.vercel.app/auth/callback'
+        redirectUri: process.env.AUTH_REDIRECT_URI || 'https://signature-pad-ten.vercel.app/auth/callback'
       },
       discord: {
         scheme: 'oauth2',
@@ -75,7 +75,7 @@ export default {
         scope: ['identify', 'email'],
         responseType: 'code',
         grantType: 'authorization_code',
-        redirectUri: process.env.AUTH_REDIRECT_URI || 'https://signature-pad-gamma.vercel.app/auth/callback'
+        redirectUri: process.env.AUTH_REDIRECT_URI || 'https://signature-pad-ten.vercel.app/auth/callback'
       }
     },
     redirect: {
